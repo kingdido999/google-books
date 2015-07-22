@@ -50,7 +50,7 @@ class GoogleBooks {
         $response = json_decode($json);
 
         // error
-        if ($response->error)
+        if (isset($response->error))
         {
             return false;
         }
@@ -88,17 +88,36 @@ class GoogleBooks {
 
     public function getImageLinks()
     {
-        return $this->item->volumeInfo->imageLinks;
+        if (isset($this->item->volumeInfo->imageLinks))
+        {
+            return $this->item->volumeInfo->imageLinks;
+        }
+
+        return null;
     }
 
     public function getSmallThumbnail()
     {
-        return $this->getImageLinks()->smallThumbnail;
+        $imageLinks = $this->getImageLinks();
+
+        if ($imageLinks)
+        {
+            return $this->getImageLinks()->smallThumbnail;
+        }
+
+        return null;
     }
 
     public function getThumbnail()
     {
-        return $this->getImageLinks()->thumbnail;
+        $imageLinks = $this->getImageLinks();
+
+        if ($imageLinks)
+        {
+            return $this->getImageLinks()->thumbnail;
+        }
+
+        return null;
     }
 
     public function getLanguageCode()
