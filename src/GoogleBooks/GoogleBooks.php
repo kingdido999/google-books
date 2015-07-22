@@ -83,7 +83,12 @@ class GoogleBooks {
 
     public function getPageCount()
     {
-        return $this->item->volumeInfo->pageCount;
+        if (isset($this->item->volumeInfo->pageCount))
+        {
+            return $this->item->volumeInfo->pageCount;
+        }
+
+        return null;
     }
 
     public function getImageLinks()
