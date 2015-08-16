@@ -22,7 +22,10 @@ class GoogleBooks {
     }
 
     public function curl($url) {
+        // Call to undefined function curl_init().?
+        // http://stackoverflow.com/questions/6382539/call-to-undefined-function-curl-init
         $ch = curl_init();
+        
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
@@ -70,17 +73,32 @@ class GoogleBooks {
 
     public function getTitle()
     {
-        return $this->item->volumeInfo->title;
+        if (isset($this->item->volumeInfo->title))
+        {
+            return $this->item->volumeInfo->title;
+        }
+
+        return null;
     }
 
     public function getAuthors()
     {
-        return $this->item->volumeInfo->authors;
+        if (isset($this->item->volumeInfo->authors))
+        {
+            return $this->item->volumeInfo->authors;
+        }
+
+        return null;
     }
 
     public function getDescription()
     {
-        return $this->item->volumeInfo->description;
+        if (isset($this->item->volumeInfo->description))
+        {
+            return $this->item->volumeInfo->description;
+        }
+
+        return null;
     }
 
     public function getPageCount()
@@ -129,7 +147,12 @@ class GoogleBooks {
 
     public function getLanguageCode()
     {
-        return $this->item->volumeInfo->language;
+        if (isset($this->item->volumeInfo->language))
+        {
+            return $this->item->volumeInfo->language;
+        }
+
+        return null;
     }
 
     public function getLanguage()

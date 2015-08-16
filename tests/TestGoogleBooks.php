@@ -85,4 +85,18 @@ class TestGoogleBooks extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function testGetAuthorsNull()
+    {
+        $key = 'AIzaSyD6Uers3Lug2GFdRpb9FCfftgA0e26fKnc';
+        $query = '8888888888';
+
+        $book = new GoogleBooks($key);
+        $book->searchByISBN($query);
+
+        $expected = null;
+        $actual = $book->getAuthors();
+
+        $this->assertEquals($expected, $actual);
+    }
 }
